@@ -10,7 +10,7 @@ function Navbar({ setAuthModal }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    user ? logout() : setAuthModal(prev => ({ ...prev, isActive: true }));
+    user ? logout() : setAuthModal({ action: "login", isActive: true });
   }
 
   return (
