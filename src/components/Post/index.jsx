@@ -8,6 +8,7 @@ import apiFetch from "../../services/apiFetch";
 import { useData } from "../../context/data";
 import { ClipLoader } from "react-spinners";
 import Comment from "../Comment";
+import NewComment from "../NewComment";
 
 function Post({ post, setAuthModal }) {
   const [isLiked, setIsLiked] = useState(false);
@@ -35,6 +36,12 @@ function Post({ post, setAuthModal }) {
     fetch();
   }, [ user, post.id ]);
 
+  useEffect(() => {
+    setComments([]);
+    setIsCommentsLoaded(false);
+    setIsCommentsOpen(false);
+  }, [post.id]);
+
   const handleLikeClick = async () => {
     try {
       if(!user) return setAuthModal({ action: "login", isActive: true });
@@ -51,12 +58,12 @@ function Post({ post, setAuthModal }) {
     }
   }
 
-  const handleCommentsClick = async () => {
+  const handleCommentsClick = async (postId) => {
     try {
       setIsCommentsOpen(!isCommentsOpen);
       if(isCommentsLoaded) return;
       setIsLoading(true);
-      const comments = await apiFetch(`comments/${post.id}`);
+      const comments = await apiFetch(`comments/${postId}`);
       setComments(comments);
       setIsCommentsLoaded(true);
       setIsLoading(false);
@@ -104,7 +111,7 @@ function Post({ post, setAuthModal }) {
             </FlexRow>
           </Button>
           <Button 
-            onClick={handleCommentsClick}
+            onClick={() => handleCommentsClick(post.id)}
             isActive={isCommentsOpen}
           >
             <FlexRow>
@@ -141,6 +148,14 @@ function Post({ post, setAuthModal }) {
               ))
           }
         </Comments>
+      }
+      {
+        user && isCommentsOpen
+        &&
+        <NewComment 
+          postId={post.id}
+          setComments={setComments}
+        />
       }
     </Container>
   );

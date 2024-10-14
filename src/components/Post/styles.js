@@ -4,8 +4,8 @@ import { COLORS } from "../../styles/colors";
 export const Container = styled.div`
   background-color: ${COLORS.gray};
   border-radius: 1rem;
-  width: 480px;
-  height: ${({ isCommentsOpen }) => isCommentsOpen ? 420 : 200}px;
+  width: 450px;
+  height: ${({ isCommentsOpen, isToCreate }) => isToCreate ? "auto" : (isCommentsOpen ? 450 : 205)}px;
   box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, .2);
   display: flex;
   flex-direction: column;
@@ -13,6 +13,7 @@ export const Container = styled.div`
   justify-content: flex-start;
   overflow: hidden;
   transition: height .3s ease;
+  position: relative;
 
   @media screen and (max-width: 570px) {
     width: 100%;
@@ -61,7 +62,7 @@ export const Button = styled.div`
 
 export const First = styled.div`
   width: 100%;
-  height: 200px;
+  height: 205px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -70,7 +71,7 @@ export const First = styled.div`
 
 export const Comments = styled.section`
   width: 100%;
-  height: 220px;
+  height: 200px;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
