@@ -29,4 +29,25 @@ export const RESET = css`
     background-color: ${COLORS.black};
     font-size: 1rem;
   }
+
+  // styling scrollbar
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: ${COLORS.graylight};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${COLORS.onyx};
+    border-radius: 6px;
+    cursor: grab;
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    cursor: grabbing;
+  }
 `;

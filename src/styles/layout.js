@@ -16,3 +16,10 @@ export const FlexColumn = styled.div`
   justify-content: ${({ justify }) => justify || "center"};
   gap: ${({ gap }) => gap || 0.5}rem;
 `;
+
+export const Image = styled.img`
+  width: ${({ size }) => size || "55px"};
+  height: ${({ size }) => size || "55px"};
+  border-radius: 50%;
+  object-fit: cover;
+`;
