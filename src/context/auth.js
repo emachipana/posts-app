@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
   }
 
   const register = async (body) => {
-    const response = await apiFetch("auth/regster", { body });
+    const response = await apiFetch("auth/register", { body });
     const { token, ...user } = response;
     localStorage.setItem(TOKEN_KEY, token);
     setUser(user);
