@@ -9,10 +9,11 @@ import { Form } from "../AuthModal/styles";
 import { useData } from "../../context/data";
 
 function NewPost() {
-  const [initialValues, setInitialValues] = useState({ content: "" });
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAuth();
   const { addPost } = useData();
+
+  const initialValues = {content: ""};
 
   const validate = (values) => {
     const errors = {};
@@ -26,12 +27,13 @@ function NewPost() {
     return errors;
   }
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, resetForm) => {
     try {
       setIsLoading(true);
       await addPost(values);
       setIsLoading(false);
-      setInitialValues({content: ""});
+      resetForm();
+      window.scrollBy({ top: 200, behavior: "smooth" });
     }catch(error) {
       setIsLoading(false);
       console.error(error);
@@ -57,7 +59,7 @@ function NewPost() {
         <Formik
           initialValues={initialValues}
           validate={validate}
-          onSubmit={handleSubmit}
+          onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
         >
           {({
             values,
