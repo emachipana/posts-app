@@ -5,6 +5,7 @@ import { Global } from '@emotion/react';
 import { RESET } from './styles/reset';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/auth';
+import { DataProvider } from './context/data';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,7 +13,9 @@ root.render(
     <Global styles={RESET} />
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <DataProvider>
+          <App />
+        </DataProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
