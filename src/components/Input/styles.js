@@ -21,7 +21,7 @@ export const Label = styled.label`
 
 export const Section = styled.section`
   width: 100%;
-  height: ${({ isFile, type }) => isFile ? "auto" : (type === "textarea" ? "80px" : "38px")};
+  height: ${({ isFile, type }) => isFile ? "auto" : (type === "textarea" ? "60px" : "38px")};
   display: flex;
   align-items: center;
   justify-content: center;

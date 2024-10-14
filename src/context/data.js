@@ -33,6 +33,20 @@ const DataProvider = ({ children }) => {
     setPosts([...newPosts]);
   }
 
+  const addPost = async (body) => {
+    const newPost = await apiFetch("posts", { body });
+    setPosts(posts => [newPost, ...posts]);
+  }
+
+  const sumCommentToPost = (postId) => {
+    const post = posts.find(post => post.id === postId);
+    post.comments = post.comments + 1; 
+    const index = posts.findIndex(post => post.id === postId);
+    const newPosts = posts;
+    posts[index] = post;
+    setPosts([...newPosts]);
+  }
+
   return (
     <DataContext.Provider
       value={{
@@ -42,7 +56,9 @@ const DataProvider = ({ children }) => {
         setError,
         setIsLoading,
         setPosts,
-        changePostLike
+        changePostLike,
+        addPost,
+        sumCommentToPost
       }}
     >
       { children }
